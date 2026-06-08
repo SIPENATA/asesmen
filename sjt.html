@@ -18,7 +18,6 @@
         .heading-font {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        /* Neon Glow Effects */
         .neon-border-blue:focus {
             outline: none;
             border-color: #38bdf8;
@@ -27,286 +26,154 @@
         .neon-glow-card {
             background: rgba(15, 23, 42, 0.65);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-        }
-        .neon-glow-active {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-            border-color: #38bdf8;
-        }
-        /* Glassmorphism utility */
-        .glass-panel {
-            background: rgba(2, 6, 23, 0.7);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
-        }
-        /* Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.5);
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(56, 189, 248, 0.3);
-            border-radius: 3px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(56, 189, 248, 0.5);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-sky-500 selection:text-slate-900">
+<body class="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 md:p-8 selection:bg-sky-500/30 selection:text-sky-200">
 
-    <div id="login-page" class="flex-grow flex items-center justify-center p-4 md:p-8 relative">
-        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-sky-600/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div id="container-box-utama" class="w-full max-w-4xl min-h-[550px] neon-glow-card rounded-3xl p-6 md:p-10 flex flex-col justify-between transition-all duration-500 relative overflow-hidden">
+        
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-800/80 pb-6 mb-6">
+            <div class="text-center sm:text-left">
+                <span class="text-xs font-bold tracking-widest text-sky-400 uppercase bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">SUCO_SITY PLATFORM</span>
+                <h1 class="heading-font text-2xl md:text-3xl font-extrabold text-white mt-2 tracking-tight">SUKOHARJO CORPORATE UNIVERSITY</h1>
+                <p class="text-xs text-slate-400 mt-1">Sistem CAT - Situational Judgment Test (SJT) Pengembangan Kompetensi ASN</p>
+            </div>
+            <div class="w-14 h-14 bg-gradient-to-br from-sky-400 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-sky-500/20 shrink-0">
+                <span class="heading-font font-black text-xl text-slate-950">SJT</span>
+            </div>
+        </div>
 
-        <div class="w-full max-w-2xl neon-glow-card rounded-2xl p-6 md:p-10 shadow-2xl relative z-10 transition-all duration-300">
-            <div class="text-center mb-8">
-                <div class="inline-flex p-3 rounded-xl bg-sky-500/10 border border-sky-500/20 mb-3 text-sky-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                </div>
-                <h1 class="heading-font text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-sky-200">
-                    SISTEM ASESMEN KOMPETENSI
-                </h1>
-                <p class="text-sm text-slate-400 mt-1 uppercase tracking-widest font-semibold">Situational Judgment Test (SJT)</p>
+        <div id="view-login" class="space-y-6 my-auto max-w-xl mx-auto w-full">
+            <div class="text-center space-y-2">
+                <h2 class="heading-font text-xl md:text-2xl font-bold text-slate-100">Verifikasi Peserta Asesmen</h2>
+                <p class="text-sm text-slate-400">Silakan masukkan NIP Anda untuk menarik profil biodata dinas dari database daerah.</p>
             </div>
 
-            <form id="auth-form" onsubmit="event.preventDefault();" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div class="space-y-2">
-                        <label class="block text-xs font-bold tracking-wider text-sky-400 uppercase">Nomor Induk Pegawai (NIP)</label>
-                        <div class="relative">
-                            <input type="text" id="input-nip" placeholder="Masukkan 18 digit NIP" 
-                                class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 neon-border-blue transition-all duration-200">
-                            <button type="button" onclick="verifyNIPFromBackend()" id="btn-search-nip"
-                                class="absolute right-2 top-2 px-3 py-1 text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-slate-900 rounded-lg transition-colors duration-150 flex items-center gap-1">
-                                <span>Verifikasi</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="block text-xs font-bold tracking-wider text-sky-400 uppercase">Kode Unik Kegiatan</label>
-                        <input type="text" id="input-kode-unik" value="KEUANGAN-2026" readonly placeholder="Contoh: SJT-G1-2026" 
-                            class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 neon-border-blue transition-all duration-200">
+            <div class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 space-y-4">
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold tracking-wider text-sky-400 uppercase">Kode Unik Kegiatan</label>
+                    <input type="text" id="input-kode-unik" value="KEUANGAN-2026" readonly placeholder="Contoh: SJT-G1-2026"
+                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 font-mono text-sm cursor-not-allowed">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold tracking-wider text-sky-400 uppercase">Nomor Induk Pegawai (NIP)</label>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="input-nip" placeholder="Masukkan NIP Resmi Anda" 
+                            class="flex-1 px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 font-mono text-sm neon-border-blue transition-all duration-200">
+                        <button onclick="verifyNIPFromBackend()" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-400 font-semibold text-sm border border-slate-700 transition-all duration-200 shrink-0">
+                            Verifikasi Data
+                        </button>
                     </div>
                 </div>
 
-                <div id="loading-spinner" class="hidden text-center py-2">
-                    <div class="inline-block animate-spin rounded-full h-5 w-5 border-2 border-t-transparent border-sky-400 mr-2 align-middle"></div>
-                    <span class="text-xs text-sky-400 font-medium">Menghubungkan ke Spreadsheet Backend...</span>
-                </div>
-                
-                <div id="success-alert" class="hidden p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                <div id="loading-spinner" class="hidden flex items-center justify-center gap-3 py-2 text-sm text-sky-400 bg-sky-950/20 border border-sky-800/30 rounded-xl">
+                    <svg class="animate-spin h-5 w-5 text-sky-400" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span id="alert-text">Data ditemukan! Biodata Anda telah disinkronisasikan secara otomatis.</span>
+                    <span>Menghubungkan ke Spreadsheet Backend...</span>
                 </div>
 
-                <div class="bg-slate-900/40 rounded-xl p-4 border border-slate-800/80 space-y-4">
-                    <h3 class="text-xs font-bold tracking-wider text-slate-400 uppercase mb-2 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                        Biodata Peserta (Sinkronisasi Sistem)
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <div>
-                            <span class="text-xs text-slate-500 block">Nama Lengkap</span>
-                            <input type="text" id="bio-nama" readonly value="-" class="w-full bg-transparent font-medium text-slate-300 py-1 border-b border-slate-800 focus:outline-none">
-                        </div>
-                        <div>
-                            <span class="text-xs text-slate-500 block">Pangkat / Golongan</span>
-                            <input type="text" id="bio-gol" readonly value="-" class="w-full bg-transparent font-medium text-slate-300 py-1 border-b border-slate-800 focus:outline-none">
-                        </div>
-                        <div>
-                            <span class="text-xs text-slate-500 block">Jabatan</span>
-                            <input type="text" id="bio-jabatan" readonly value="-" class="w-full bg-transparent font-medium text-slate-300 py-1 border-b border-slate-800 focus:outline-none">
-                        </div>
-                        <div>
-                            <span class="text-xs text-slate-500 block">Perangkat Daerah</span>
-                            <input type="text" id="bio-pd" readonly value="-" class="w-full bg-transparent font-medium text-slate-300 py-1 border-b border-slate-800 focus:outline-none">
-                        </div>
+                <div id="success-alert" class="hidden flex items-start gap-3 p-4 bg-emerald-950/30 border border-emerald-800/40 rounded-xl text-emerald-400 text-xs leading-relaxed">
+                    <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span id="alert-text">Data ditemukan! Profil Anda berhasil disinkronisasikan.</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div class="space-y-1.5"><label class="text-slate-500">Nama Lengkap</label><input type="text" id="bio-nama" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
+                <div class="space-y-1.5"><label class="text-slate-500">Pangkat / Golongan</label><input type="text" id="bio-gol" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
+                <div class="space-y-1.5"><label class="text-slate-500">Jabatan Struktural/Fungsional</label><input type="text" id="bio-jabatan" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
+                <div class="space-y-1.5"><label class="text-slate-500">Instansi / Perangkat Daerah</label><input type="text" id="bio-pd" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
+            </div>
+
+            <button id="btn-start-test" disabled onclick="switchViewToAssessment()" class="w-full py-4 rounded-xl bg-slate-800 text-slate-500 font-bold tracking-wider uppercase text-sm cursor-not-allowed border border-slate-700/50 transition-all duration-300">
+                Mulai Ujian Asesmen
+            </button>
+        </div>
+
+        <div id="view-assessment" class="hidden flex-1 flex flex-col justify-between gap-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/30 border border-slate-800/80 px-4 py-3 rounded-2xl text-xs">
+                <div class="flex items-center gap-4 text-slate-400">
+                    <div>NIP: <span id="display-nip" class="text-slate-200 font-mono font-bold"></span></div>
+                    <div class="hidden sm:block">Nama: <span id="display-nama" class="text-slate-200 font-bold"></span></div>
+                </div>
+                <div class="font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md">
+                    Progress: <span id="progress-text">0 / 3</span> Soal Terjawab
+                </div>
+            </div>
+
+            <div class="space-y-4 my-auto py-4">
+                <div class="space-y-2">
+                    <span id="question-number" class="text-xs font-bold uppercase tracking-wider text-sky-400">SOAL NOMOR 1</span>
+                    <p id="question-text" class="text-base md:text-lg text-white font-medium leading-relaxed">Memuat konten studi kasus teks...</p>
+                </div>
+                <div id="options-container" class="space-y-3 pt-2">
                     </div>
-                </div>
+            </div>
 
-                <button type="button" id="btn-start-test" disabled onclick="launchAssessment()"
-                    class="w-full py-4 rounded-xl bg-gradient-to-r from-slate-700 to-slate-800 text-slate-400 font-bold tracking-wider uppercase cursor-not-allowed transition-all duration-300 text-sm shadow-lg">
-                    Mulai Ujian Kompetensi (SJT)
-                </button>
-            </form>
+            <div class="flex justify-between items-center gap-4 border-t border-slate-800/60 pt-4">
+                <button id="btn-prev" onclick="navigateQuestion(-1)" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed transition-all">Sebelumnya</button>
+                <button id="btn-next" onclick="navigateQuestion(1)" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-slate-950 text-sm font-bold shadow-lg shadow-sky-600/10 transition-all">Selanjutnya</button>
+                <button id="btn-submit" onclick="triggerFinalSubmission()" class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 text-sm font-extrabold shadow-lg shadow-emerald-500/10 transition-all uppercase tracking-wider">Selesai & Kunci</button>
+            </div>
+        </div>
+
+        <div class="text-center text-[10px] text-slate-600 tracking-wide border-t border-slate-900/50 pt-4 mt-6">
+            &copy; 2026 Badan Kepegawaian dan Pengembangan Sumber Daya Manusia (BKPSDM) Kabupaten Sukoharjo. All Rights Reserved.
         </div>
     </div>
 
-
-    <div id="exam-page" class="hidden flex-grow flex flex-col justify-between">
-        <header class="glass-panel sticky top-0 z-40 px-4 py-3 md:px-8 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <div class="h-9 w-9 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center font-black text-slate-900 text-sm tracking-tighter">
-                    SJT
-                </div>
-                <div>
-                    <h2 class="heading-font font-bold text-sm text-white tracking-wide">SJT CAT SYSTEM</h2>
-                    <p class="text-xs text-sky-400/80 font-mono" id="display-user-info">NIP: - | Sesi: -</p>
-                </div>
-            </div>
-            
-            <div class="px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-xs font-bold uppercase tracking-widest text-sky-400 hidden lg:block">
-                Sub-Tes: Situational Judgment Test
-            </div>
-
-            <div class="flex items-center gap-4 ml-auto lg:ml-0">
-                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
-                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span class="text-[11px] font-mono" id="sync-status">Connected</span>
-                </div>
-                <div class="flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-xl border border-slate-700 shadow-inner">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span id="countdown-timer" class="font-mono text-base font-bold text-sky-400 tracking-wider">90:00</span>
-                </div>
-            </div>
-        </header>
-
-        <main class="flex-grow p-4 md:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-4 gap-6 max-w-[1600px] mx-auto w-full">
-            
-            <div class="lg:col-span-3 flex flex-col justify-between space-y-6">
-                <div class="bg-slate-900/60 rounded-2xl p-5 md:p-8 border border-slate-800/80 shadow-xl flex-grow flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
-                            <span class="text-xs font-bold text-sky-400 tracking-widest uppercase bg-sky-950/60 border border-sky-900 px-3 py-1 rounded-md" id="question-number-title">
-                                BUTIR SOAL NO: 1
-                            </span>
-                            <span class="text-xs text-slate-500 font-medium">Pilih salah satu jawaban yang paling mencerminkan tindakan Anda</span>
-                        </div>
-                        
-                        <div class="prose prose-invert max-w-none mb-6">
-                            <p id="question-text" class="text-slate-200 text-sm md:text-base leading-relaxed font-normal">
-                                Memuat butir soal...
-                            </p>
-                        </div>
-
-                        <div class="space-y-3 mt-6" id="options-container">
-                            <label onclick="selectOption('A')" class="group flex items-start gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500/40 cursor-pointer transition-all duration-150">
-                                <div id="radio-A" class="w-6 h-6 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold group-hover:bg-slate-700 group-hover:text-sky-400 shrink-0 transition-colors">A</div>
-                                <span id="text-A" class="text-sm text-slate-300 group-hover:text-white transition-colors leading-relaxed">-</span>
-                            </label>
-                            <label onclick="selectOption('B')" class="group flex items-start gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500/40 cursor-pointer transition-all duration-150">
-                                <div id="radio-B" class="w-6 h-6 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold group-hover:bg-slate-700 group-hover:text-sky-400 shrink-0 transition-colors">B</div>
-                                <span id="text-B" class="text-sm text-slate-300 group-hover:text-white transition-colors leading-relaxed">-</span>
-                            </label>
-                            <label onclick="selectOption('C')" class="group flex items-start gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500/40 cursor-pointer transition-all duration-150">
-                                <div id="radio-C" class="w-6 h-6 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold group-hover:bg-slate-700 group-hover:text-sky-400 shrink-0 transition-colors">C</div>
-                                <span id="text-C" class="text-sm text-slate-300 group-hover:text-white transition-colors leading-relaxed">-</span>
-                            </label>
-                            <label onclick="selectOption('D')" class="group flex items-start gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500/40 cursor-pointer transition-all duration-150">
-                                <div id="radio-D" class="w-6 h-6 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold group-hover:bg-slate-700 group-hover:text-sky-400 shrink-0 transition-colors">D</div>
-                                <span id="text-D" class="text-sm text-slate-300 group-hover:text-white transition-colors leading-relaxed">-</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between border-t border-slate-800 pt-5 mt-8 gap-3">
-                        <button type="button" onclick="navigateQuestion(-1)" id="btn-prev" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-sm font-semibold transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
-                            Sebelumnya
-                        </button>
-                        
-                        <button type="button" onclick="toggleDoubtful()" id="btn-doubt" class="px-5 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 text-sm font-semibold transition-colors flex items-center gap-1.5">
-                            <input type="checkbox" id="checkbox-doubt" class="rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-0 pointer-events-none">
-                            Ragu-Ragu
-                        </button>
-                        
-                        <button type="button" onclick="navigateQuestion(1)" id="btn-next" class="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-900 text-sm font-bold transition-all shadow-md">
-                            Selanjutnya
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lg:col-span-1 flex flex-col h-[550px] lg:h-auto bg-slate-900/40 rounded-2xl border border-slate-800/80 p-5 shadow-xl">
-                <h3 class="heading-font text-xs font-bold tracking-wider text-slate-400 uppercase mb-4 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
-                    </svg>
-                    PETA NAVIGASI SOAL (SJT)
-                </h3>
-                
-                <div class="flex-grow overflow-y-auto custom-scrollbar pr-1 mb-4">
-                    <div class="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-4 gap-2.5" id="nav-grid">
-                        </div>
-                </div>
-
-                <div class="border-t border-slate-800 pt-4 space-y-2 text-[11px] font-medium text-slate-400">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded bg-emerald-500 border border-emerald-400 block shrink-0"></span> Sudah Diisi</div>
-                        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded bg-amber-500 border border-amber-400 block shrink-0"></span> Ragu-Ragu</div>
-                        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded bg-slate-800 border border-slate-700 block shrink-0"></span> Belum Dibuka</div>
-                        <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded border border-sky-400 ring-2 ring-sky-400/20 block shrink-0"></span> Posisi Aktif</div>
-                    </div>
-                    <div class="pt-2">
-                        <button type="button" onclick="triggerFinishAssessment()" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold uppercase rounded-xl tracking-wider text-xs transition-colors shadow-lg">
-                            Selesai & Kirim Jawaban
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <footer class="w-full text-center py-4 border-t border-slate-900 text-[11px] text-slate-500 tracking-wider">
-        &copy; 2026 BKPSDM KABUPATEN SUKOHARJO — CORPORATE UNIVERSITY HUB (SuCoSity)
-    </footer>
-
-
     <script>
-        // Manajemen State Aplikasi Utama
-        const totalQuestions = 15; // Anda bisa mengubah angka ini sesuai jumlah soal riil Anda
-        let currentIdx = 1; 
-        
-        let userAnswers = {};  // Menyimpan jawaban (Kunci: No Soal, Nilai: Opsi 'A'/'B'/'C'/'D')
-        let doubtStatus = {};  // Menyimpan status ragu-ragu (Kunci: No Soal, Nilai: true/false)
-        let openedQuestions = {1: true}; 
+        // ====================================================================
+        // KONFIGURASI JEMBATAN API (PASTIKAN MASUKKAN URL EXEC SPREADSHEET ANDA)
+        // ====================================================================
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx-mLi4aD8LvtqwmCuAk3h8vOF5dsh3IHVoxg78gkopAiroTkUDfIaj_44aKZG6zWHQ/exec"; 
 
-        // Bank Soal Riil / Dummy untuk Keperluan Rendring UI
-        const sampleQuestions = {
-            1: {
-                text: "Di dalam ruang kerja instansi Anda, terjadi konflik perbedaan pendapat antara dua rekan kerja mengenai penugasan tim dari kepala instansi. Kedua rekan kerja tersebut saling berargumen dengan keras hingga mengganggu konsentrasi pegawai lain di ruangan. Tindakan yang paling tepat untuk Anda lakukan sebagai rekan kerja searah adalah...",
-                choices: {
-                    A: "Mendekati keduanya dan meminta dengan tegas agar mereka menyelesaikan perdebatan di ruang rapat internal atau ruang konseling agar tidak mengganggu fokus kerja pegawai lain.",
-                    B: "Melaporkan kejadian perselisihan tersebut secara langsung ke Kepala Sub Bagian Umum atau Atasan Langsung agar segera ditindaklanjuti secara struktural.",
-                    C: "Membiarkan perdebatan tersebut terjadi karena menganggap itu adalah dinamika wajar dalam penugasan organisasi dan bukan merupakan wewenang saya.",
-                    D: "Ikut bergabung dalam perdebatan untuk menengahi secara sepihak berdasarkan pemahaman pribadi saya mengenai tugas yang didelegasikan oleh kepala instansi."
+        // Simulasi Bank Soal Kondisional (SJT) BKPSDM Sukoharjo
+        const bankSoal = [
+            {
+                id: 1,
+                soal: "Anda diminta memimpin sub-kegiatan penyusunan dokumen perencanaan kompetensi pegawai (Bangkom Plan). Di tengah jalan, terdapat perubahan regulasi mendadak dari BKN pusat yang mengubah format dokumen secara total, sementara batas waktu pengumpulan tersisa 3 hari lagi. Apa tindakan utama Anda?",
+                opsi: {
+                    A: "Menghentikan pengerjaan sementara waktu untuk menunggu instruksi teknis tertulis yang lebih rinci dari kepala dinas.",
+                    B: "Mempelajari inti format regulasi baru secara cepat bersama tim, membagi tugas ulang, dan bekerja lembur untuk menyelesaikan tepat waktu.",
+                    C: "Melaporkan kendala tenggat waktu kepada pimpinan dan meminta dispensasi perpanjangan waktu pengumpulan dokumen ke BKN.",
+                    D: "Tetap menggunakan dokumen format lama yang hampir selesai lalu melampirkan surat keterangan kendala teknis sebagai pelengkap."
                 }
             },
-            2: {
-                text: "Seorang warga/masyarakat mendatangi meja pelayanan Anda dengan amarah tinggi, mengeluhkan keterlambatan pengurusan dokumen perizinan yang seharusnya selesai hari ini, sedangkan sistem database server instansi sedang mengalami gangguan jaringan pusat. Sikap yang harus Anda utamakan adalah...",
-                choices: {
-                    A: "Meminta maaf dengan empati tinggi, mendengarkan keluhannya dengan tenang, mencatat nomor kontak mereka, serta berjanji segera mengabari secara personal begitu server kembali online.",
-                    B: "Menjelaskan secara teknis dengan nada netral bahwa kerusakan jaringan berada di pusat Jakarta dan meminta mereka kembali esok hari tanpa memberikan jaminan kepastian data.",
-                    C: "Memanggil petugas keamanan (Satpam) untuk mengamankan warga tersebut keluar ruangan karena telah mengganggu kenyamanan ruang pelayanan publik instansi.",
-                    D: "Mengabaikan komplainnya dan melanjutkan pekerjaan administratif lain sambil menunggu jaringan internet kembali normal secara otomatis."
-                }
+            {
+                id: 2,
+                soal: "Saat melakukan pelayanan administrasi sertifikat digital pelatihan pegawai di kantor BKPSDM, seorang oknum mengaku dari instansi strategis meminta didahulukan layanannya tanpa mengantre dengan alasan perintah pimpinan daerah, padahal antrean di sistem saat itu sedang sangat padat. Sikap Anda?",
+                A: "Menolak dengan tegas dan meminta oknum tersebut tetap mengambil nomor antrean demi asas keadilan seluruh aparatur.",
+                B: "Langsung melayaninya saat itu juga karena khawatir memicu konflik horizontal dengan jaringan pimpinan daerah.",
+                C: "Menerima berkasnya secara sopan, menerangkan prosedur tata tertib antrean, dan berjanji memprosesnya segera setelah antrean saat itu terurai.",
+                D: "Melimpahkan penanganan oknum tersebut kepada subkoordinator atau kepala bidang agar instansi Anda aman dari intimidasi."
             },
-            3: {
-                text: "Anda ditugaskan memimpin sebuah pokja atau tim kerja yang beranggotakan lintas generasi, di mana beberapa pegawai senior merasa kesulitan menggunakan aplikasi pelaporan digital baru yang diwajibkan oleh pimpinan daerah. Langkah taktis Anda adalah...",
-                choices: {
-                    A: "Menyelenggarakan sesi pendampingan intensif (coaching) secara personal satu-per-satu di mana pegawai muda ditunjuk sebagai tutor sebaya bagi pegawai senior.",
-                    B: "Mengambil alih seluruh pekerjaan digital mereka dan mengerjakannya sendiri agar laporan tim tetap selesai tepat waktu tanpa kendala.",
-                    C: "Menghadap pimpinan untuk mengusulkan penggantian anggota tim yang senior dengan pegawai yang lebih melek teknologi agar kinerja pokja optimal.",
-                    D: "Membiarkan mereka bekerja dengan cara manual lama dan mengabaikan sistem pelaporan digital baru untuk menghindari konflik kenyamanan internal tim."
-                }
+            {
+                id: 3,
+                soal: "Sukoharjo Corporate University (SuCoSity) meluncurkan program pelatihan digital mandiri (MOOC) baru. Namun dari evaluasi awal, tingkat partisipasi pegawai dari rumpun kecamatan sangat rendah karena alasan kendala sinyal internet dan kesibukan administrasi lapangan. Bagaimana strategi solusi Anda?",
+                A: "Mengusulkan pembuatan posko belajar digital komunal terpadu di tingkat kecamatan dengan fasilitas internet difasilitasi daerah.",
+                B: "Memberikan teguran tertulis atau sanksi pemotongan nilai indeks profesionalitas bagi pegawai kecamatan yang tidak ikut.",
+                C: "Membiarkan kondisi tersebut karena beranggapan bahwa digitalisasi adalah tanggung jawab pribadi masing-masing pegawai.",
+                D: "Mengubah format pembelajaran mandiri menjadi sistem klasikal (tatap muka) penuh khusus untuk klaster aparatur kecamatan."
             }
-        };
+        ];
 
-        // 1. INTEGRASI BACKEND: VERIFIKASI NIP & AMBIL DATA SPREADSHEET
+        let currentQuestionIndex = 0;
+        let userAnswers = {}; // Objek penyimpan jawaban lokal { nomorSoal: pilihan }
+
+        // 1. FUNGSI VERIFIKASI NIP (MENGGUNAKAN JALUR GET FETCH API)
         function verifyNIPFromBackend() {
             const nip = document.getElementById('input-nip').value.trim();
             const kode = document.getElementById('input-kode-unik').value.trim();
             
             if (nip.length < 5 || kode.length === 0) {
-                alert("Silakan masukkan NIP (minimal 5 digit) dan Kode Unik Kegiatan terlebih dahulu.");
+                alert("Silakan masukkan NIP (minimal 5 digit) dan Kode Unik Kegiatan.");
                 return;
             }
 
@@ -314,285 +181,184 @@
             const alertBox = document.getElementById('success-alert');
             const btnStart = document.getElementById('btn-start-test');
             
-            spinner.classList.remove('hidden');
-            alertBox.classList.add('hidden');
+            if (spinner) spinner.classList.remove('hidden');
+            if (alertBox) alertBox.classList.add('hidden');
 
-            // Menjalankan fungsi server di Kode.gs secara asinkronus
-            google.script.run
-                .withSuccessHandler(function(response) {
-                    spinner.classList.add('hidden');
-                    if (response.success) {
-                        alertBox.classList.remove('hidden');
-                        document.getElementById('alert-text').innerText = "Data ditemukan! Biodata Anda telah disinkronisasikan secara otomatis.";
+            // Integrasi ke Google Script (doGet)
+            const endpoints = `${WEB_APP_URL}?action=getEmployee&nip=${nip}`;
+
+            fetch(endpoints)
+                .then(res => res.json())
+                .then(response => {
+                    if (spinner) spinner.classList.add('hidden');
+                    
+                    if (response && response.success) {
+                        if (alertBox) alertBox.classList.remove('hidden');
+                        document.getElementById('alert-text').innerText = "Data ditemukan! Profil Anda berhasil disinkronisasikan.";
                         
-                        // Mapping data baris dari sheet Data_Pegawai ke form read-only
-                        document.getElementById('bio-nama').value = response.nama;
-                        document.getElementById('bio-gol').value = response.pangkatGolongan;
-                        document.getElementById('bio-jabatan').value = response.jabatan;
-                        document.getElementById('bio-pd').value = response.perangkatDaerah;
+                        document.getElementById('bio-nama').value = response.nama || '-';
+                        document.getElementById('bio-gol').value = response.pangkatGolongan || '-';
+                        document.getElementById('bio-jabatan').value = response.jabatan || '-';
+                        document.getElementById('bio-pd').value = response.perangkatDaerah || '-';
                         
-                        // Membuka proteksi / mengaktifkan tombol Mulai
-                        btnStart.removeAttribute('disabled');
-                        btnStart.classList.remove('from-slate-700', 'to-slate-800', 'text-slate-400', 'cursor-not-allowed');
-                        btnStart.classList.add('from-sky-500', 'to-indigo-600', 'text-slate-900', 'neon-glow-active', 'hover:opacity-90');
+                        if (btnStart) {
+                            btnStart.removeAttribute('disabled');
+                            btnStart.className = "w-full py-4 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-slate-900 font-bold tracking-wider uppercase transition-all duration-300 text-sm shadow-lg hover:opacity-90";
+                        }
                     } else {
-                        alert(response.message);
+                        alert(response.message || "NIP tidak ditemukan di database.");
                     }
                 })
-                .withFailureHandler(function(error) {
-                    spinner.classList.add('hidden');
-                    alert("Gagal berkomunikasi dengan server Apps Script: " + error);
-                })
-                .getEmployeeDataByNIP(nip);
+                .catch(error => {
+                    if (spinner) spinner.classList.add('hidden');
+                    alert("Gagal terhubung ke Google API Gateway. Pastikan URL Web App Anda valid dan setelan aksesnya 'Anyone'.");
+                    console.error(error);
+                });
         }
 
-        // 2. PINDAH LAYER: MASUK KE AREA EXAM CAT
-        function launchAssessment() {
-            const nip = document.getElementById('input-nip').value.trim();
-            const kode = document.getElementById('input-kode-unik').value.trim();
+        function switchViewToAssessment() {
+            document.getElementById('display-nip').innerText = document.getElementById('input-nip').value.trim();
+            document.getElementById('display-nama').innerText = document.getElementById('bio-nama').value;
             
-            document.getElementById('display-user-info').innerText = `NIP: ${nip} | Sesi: ${kode}`;
-            
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('exam-page').classList.remove('hidden');
-            
-            renderNavigationGrid();
+            document.getElementById('view-login').classList.add('hidden');
+            document.getElementById('view-assessment').classList.remove('hidden');
             renderQuestion();
-            startTimer(5400); // Durasi pengerjaan: 90 Menit (5400 detik)
         }
 
-        // 3. RENDER GRID PETUNJUK SOAL (CAT STYLE)
-        function renderNavigationGrid() {
-            const gridContainer = document.getElementById('nav-grid');
-            gridContainer.innerHTML = '';
-            
-            for (let i = 1; i <= totalQuestions; i++) {
-                const btn = document.createElement('button');
-                btn.type = "button";
-                btn.id = `nav-btn-${i}`;
-                btn.innerText = i < 10 ? `0${i}` : i;
-                
-                let baseStyle = "h-11 rounded-lg font-mono text-xs font-bold border transition-all flex items-center justify-center ";
-                
-                if (i === currentIdx) {
-                    baseStyle += "border-sky-400 ring-2 ring-sky-400/30 text-sky-400 font-extrabold bg-sky-950/40";
-                } else if (doubtStatus[i]) {
-                    baseStyle += "bg-amber-500 border-amber-400 text-slate-900 shadow-md shadow-amber-500/10";
-                } else if (userAnswers[i]) {
-                    baseStyle += "bg-emerald-500 border-emerald-400 text-slate-900 shadow-md shadow-emerald-500/10";
-                } else if (openedQuestions[i]) {
-                    baseStyle += "bg-slate-800 border-slate-700 text-slate-300";
-                } else {
-                    baseStyle += "bg-slate-950/40 border-slate-800/80 text-slate-600";
-                }
-                
-                btn.className = baseStyle;
-                btn.setAttribute('onclick', `jumpToQuestion(${i})`);
-                gridContainer.appendChild(btn);
-            }
-        }
-
-        // 4. RENDER TEKS SOAL & PILIHAN JAWABAN AKTIF
         function renderQuestion() {
-            document.getElementById('question-number-title').innerText = `BUTIR SOAL NO: ${currentIdx}`;
+            const soalAktif = bankSoal[currentQuestionIndex];
+            document.getElementById('question-number').innerText = `SOAL NOMOR ${soalAktif.id} DARI ${bankSoal.length}`;
+            document.getElementById('question-text').innerText = soalAktif.soal;
             
-            // Mengambil soal dari bank soal lokal (jika tidak ada, generate template fallback otomatis)
-            const qData = sampleQuestions[currentIdx] || {
-                text: `[Butir Kasus Ke-${currentIdx}] Sebagai pejabat fungsional di instansi pelayanan publik, Anda mendapati instansi mengalami pemangkasan anggaran operasional tahunan sebesar 20%. Namun, target kepuasan pelayanan masyarakat dari pimpinan daerah dinaikkan sebesar 5%. Bagaimana Anda menyikapi rancangan kerja tim Anda?`,
-                choices: {
-                    A: `Melakukan inovasi efisiensi internal berbasis digitalisasi tanpa biaya (Open Source) guna memangkas jalur birokrasi dan mempertahankan mutu pelayanan publik ke masyarakat.`,
-                    B: `Mengajukan protes resmi tertulis kepada tim anggaran daerah agar rasio pagu anggaran dikembalikan seperti semula demi kenyamanan pelaksanaan tugas harian.`,
-                    C: `Mengurangi jam kerja operasional loket luar agar beban pemakaian listrik dan fasilitas pendukung kantor berkurang drastis sesuai pagu anggaran.`,
-                    D: `Menerima kondisi tersebut dengan pasrah serta menurunkan kualitas standar kualitas pelayanan karena keterbatasan dana operasional pendukung.`
-                }
+            const containerOpsi = document.getElementById('options-container');
+            containerOpsi.innerHTML = '';
+            
+            // Loop abjad pilihan jawaban A s.d D
+            for (const [key, value] of Object.entries(soalAktif.opsi)) {
+                const isSelected = userAnswers[soalAktif.id] === key;
+                const button = document.createElement('button');
+                button.className = `w-full text-left p-4 rounded-xl border transition-all duration-200 text-sm flex gap-3 ${
+                    isSelected 
+                    ? 'bg-sky-500/10 border-sky-500 text-sky-300 font-medium shadow-md shadow-sky-500/5' 
+                    : 'bg-slate-900/40 border-slate-800 text-slate-300 hover:bg-slate-900/80 hover:border-slate-700'
+                }`;
+                
+                button.onclick = () => selectAnswer(soalAktif.id, key);
+                button.innerHTML = `
+                    <span class="w-6 h-6 rounded-md flex items-center justify-center font-bold text-xs ${isSelected ? 'bg-sky-500 text-slate-950' : 'bg-slate-800 text-slate-400'}">${key}</span>
+                    <span class="flex-1 leading-relaxed">${value}</span>
+                `;
+                containerOpsi.appendChild(button);
+            }
+            
+            updateNavigationControls();
+        }
+
+        // 2. FUNGSI AUTO-SAVE (MENGGUNAKAN JALUR POST FETCH API - REALTIME)
+        function selectAnswer(soalId, abjadPilihan) {
+            userAnswers[soalId] = abjadPilihan;
+            renderQuestion();
+            
+            const countAnswered = Object.keys(userAnswers).length;
+            document.getElementById('progress-text').innerText = countAnswered;
+            
+            const kodeKegiatan = document.getElementById('input-kode-unik').value.trim();
+            const nip = document.getElementById('input-nip').value.trim();
+            
+            // Format lemparan data ke backend (POST)
+            const payload = {
+                action: "saveRealTime",
+                kodeKegiatan: kodeKegiatan,
+                nip: nip,
+                nomorSoal: soalId,
+                pilihanJawaban: abjadPilihan
             };
 
-            document.getElementById('question-text').innerText = qData.text;
-            
-            const alphabet = ['A', 'B', 'C', 'D'];
-            alphabet.forEach(letter => {
-                document.getElementById(`text-${letter}`).innerText = qData.choices[letter];
-                
-                const radioBox = document.getElementById(`radio-${letter}`);
-                const parentLabel = radioBox.parentElement;
-                
-                radioBox.className = "w-6 h-6 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold shrink-0 transition-colors group-hover:bg-slate-700 group-hover:text-sky-400 text-slate-400";
-                parentLabel.className = "group flex items-start gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500/40 cursor-pointer transition-all duration-150";
-                
-                if (userAnswers[currentIdx] === letter) {
-                    radioBox.className = "w-6 h-6 rounded-lg bg-sky-500 border border-sky-400 text-slate-900 flex items-center justify-center text-xs font-black shrink-0 shadow-lg shadow-sky-500/20";
-                    parentLabel.className = "group flex items-start gap-4 p-4 rounded-xl bg-sky-950/50 border-sky-500 text-white cursor-pointer transition-all duration-150 shadow-md";
-                }
-            });
+            // Fetch POST dengan mode no-cors agar pengiriman data latar belakang tidak terkendala regulasi browser
+            fetch(WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).catch(err => console.error("Koneksi gagal saat auto-save:", err));
+        }
 
-            document.getElementById('checkbox-doubt').checked = doubtStatus[currentIdx] || false;
-            document.getElementById('btn-prev').disabled = (currentIdx === 1);
+        function navigateQuestion(arah) {
+            currentQuestionIndex += arah;
+            renderQuestion();
+        }
+
+        function updateNavigationControls() {
+            document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
             
-            const btnNext = document.getElementById('btn-next');
-            if (currentIdx === totalQuestions) {
-                btnNext.innerText = "Selesai";
-                btnNext.className = "px-6 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-sm font-bold transition-all shadow-md";
+            if (currentQuestionIndex === bankSoal.length - 1) {
+                document.getElementById('btn-next').classList.add('hidden');
+                document.getElementById('btn-submit').classList.remove('hidden');
             } else {
-                btnNext.innerText = "Selanjutnya";
-                btnNext.className = "px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-900 text-sm font-bold transition-all shadow-md";
+                document.getElementById('btn-next').classList.remove('hidden');
+                document.getElementById('btn-submit').classList.add('hidden');
             }
         }
 
-        // 5. MEMILIH OPSI: TRIGGER JAWABAN & AUTO-SAVE KE CLOUD
-        function selectOption(letter) {
-            userAnswers[currentIdx] = letter;
-            
-            // Trigger fungsi pengiriman data real-time ke log spreadsheet
-            sendAnswerToCloud(currentIdx, letter);
-            
-            renderQuestion();
-            renderNavigationGrid();
-        }
-
-        // 6. INTEGRASI BACKEND: AUTO-SAVE REAL-TIME PER SOAL
-        function sendAnswerToCloud(questionNum, choiceValue) {
-            const statusIndicator = document.getElementById('sync-status');
-            const nip = document.getElementById('input-nip').value.trim();
-            const kode = document.getElementById('input-kode-unik').value.trim();
-
-            statusIndicator.innerText = "Saving...";
-            statusIndicator.parentElement.classList.replace('bg-emerald-500/10', 'bg-amber-500/10');
-            statusIndicator.parentElement.classList.replace('border-emerald-500/20', 'border-amber-500/20');
-            statusIndicator.parentElement.classList.replace('text-emerald-400', 'text-amber-400');
-            
-            // Menjalankan fungsi simpan di Kode.gs tanpa menginterupsi fokus peserta
-            google.script.run
-                .withSuccessHandler(function(response) {
-                    if (response.success) {
-                        statusIndicator.innerText = "Saved to Cloud";
-                        statusIndicator.parentElement.classList.replace('bg-amber-500/10', 'bg-emerald-500/10');
-                        statusIndicator.parentElement.classList.replace('border-amber-500/20', 'border-emerald-500/20');
-                        statusIndicator.parentElement.classList.replace('text-amber-400', 'text-emerald-400');
-                    }
-                })
-                .saveAnswerRealTime(kode, nip, questionNum, choiceValue);
-        }
-
-        // 7. KLIK RAGU-RAGU
-        function toggleDoubtful() {
-            const currentDoubt = doubtStatus[currentIdx] || false;
-            doubtStatus[currentIdx] = !currentDoubt;
-            
-            renderQuestion();
-            renderNavigationGrid();
-        }
-
-        // 8. NAVIGASI TOMBOL NEXT / PREVIOUS
-        function navigateQuestion(direction) {
-            if (direction === 1 && currentIdx === totalQuestions) {
-                triggerFinishAssessment();
-                return;
-            }
-            
-            currentIdx += direction;
-            if (currentIdx < 1) currentIdx = 1;
-            if (currentIdx > totalQuestions) currentIdx = totalQuestions;
-            
-            openedQuestions[currentIdx] = true;
-            renderQuestion();
-            renderNavigationGrid();
-        }
-
-        // 9. LOMPAT NOMOR VIA GRID MATRIKS
-        function jumpToQuestion(targetIndex) {
-            currentIdx = targetIndex;
-            openedQuestions[currentIdx] = true;
-            renderQuestion();
-            renderNavigationGrid();
-        }
-
-        // 10. ENGINE PENGHITUNG WAKTU MUNDUR (COUNTDOWN TIMER)
-        function startTimer(durationInSeconds) {
-            let timer = durationInSeconds;
-            const display = document.getElementById('countdown-timer');
-            
-            const intervalId = setInterval(() => {
-                let minutes = parseInt(timer / 60, 10);
-                let seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = minutes + ":" + seconds;
-
-                // Alarm visual jika waktu pengerjaan tersisa di bawah 5 menit
-                if (timer < 300) {
-                    display.classList.replace('text-sky-400', 'text-rose-500');
+        // 3. FUNGSI SUBMIT FINAL SELESAI UJIAN (MENGGUNAKAN JALUR POST FETCH API)
+        function triggerFinalSubmission() {
+            const countAnswered = Object.keys(userAnswers).length;
+            if (countAnswered < bankSoal.length) {
+                if (!confirm("Anda belum menjawab seluruh soal asesmen. Tetap ingin menyelesaikan dan mengunci lembar ujian?")) {
+                    return;
                 }
-
-                if (--timer < 0) {
-                    clearInterval(intervalId);
-                    alert("Waktu pengerjaan asesmen telah habis! Sistem otomatis mengunci jawaban terakhir Anda.");
-                    submitAllDataFinal();
+            } else {
+                if (!confirm("Apakah Anda sudah yakin dengan semua jawaban Anda? Klik OK untuk mengunci nilai data secara permanen.")) {
+                    return;
                 }
-            }, 1000);
-        }
-
-        // 11. KONFIRMASI TOMBOL SELESAI
-        function triggerFinishAssessment() {
-            const unanswered = totalQuestions - Object.keys(userAnswers).length;
-            let warningText = "Apakah Anda yakin ingin menyelesaikan ujian dan mengirim seluruh rangkaian lembar jawaban?";
-            
-            if (unanswered > 0) {
-                warningText += `\n\nPERINGATAN: Masih ada ${unanswered} butir soal yang BELUM Anda jawab!`;
             }
 
-            if (confirm(warningText)) {
-                submitAllDataFinal();
-            }
-        }
+            const mainBox = document.getElementById('container-box-utama');
+            mainBox.innerHTML = '<div class="text-center py-20 text-sky-400 font-medium">Mengunci seluruh lembar jawaban... Jangan tutup halaman ini.</div>';
 
-        // 12. INTEGRASI BACKEND: LOCK & SUBMIT FINAL KE SPREADSHEET
-        function submitAllDataFinal() {
+            const kodeKegiatan = document.getElementById('input-kode-unik').value.trim();
             const nip = document.getElementById('input-nip').value.trim();
-            const kode = document.getElementById('input-kode-unik').value.trim();
-            const jsonAnswers = JSON.stringify(userAnswers);
 
-            // Ganti seluruh UI dengan layar loading transaksional akhir
-            document.body.innerHTML = `
-                <div class="min-h-screen flex flex-col items-center justify-center bg-[#0b132b] text-slate-200 p-6 text-center">
-                    <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-t-transparent border-sky-400 mb-4"></div>
-                    <h1 class="heading-font text-xl font-bold text-white mb-2">Mengunci Lembar Jawaban Akhir...</h1>
-                    <p class="text-xs text-slate-400">Mohon tunggu sebentar, sistem sedang melakukan sinkronisasi akhir data ke server.</p>
-                </div>
-            `;
+            const payload = {
+                action: "submitFinal",
+                kodeKegiatan: kodeKegiatan,
+                nip: nip,
+                userAnswersObj: userAnswers
+            };
 
-            // Memanggil fungsi submitAssessmentFinal di Kode.gs
-            google.script.run
-                .withSuccessHandler(function(response) {
-                    if (response.success) {
-                        document.body.innerHTML = `
-                            <div class="min-h-screen flex flex-col items-center justify-center bg-[#0b132b] text-slate-200 p-6 text-center">
-                                <div class="p-4 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mb-4 animate-bounce">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <h1 class="heading-font text-2xl md:text-3xl font-extrabold text-white mb-2">ASESMEN SELESAI & TERSIMPAN</h1>
-                                <p class="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
-                                    Terima kasih, lembar jawaban Situational Judgment Test (SJT) Anda telah berhasil dikunci dan dikirimkan langsung ke pangkalan data Spreadsheet BKPSDM.
-                                </p>
-                                <div class="mt-6 p-4 rounded-xl bg-slate-900 border border-slate-800 text-left text-xs font-mono max-w-sm w-full space-y-1.5">
-                                    <div class="text-sky-400 border-b border-slate-800 pb-1 font-bold">BUKTI DIGITAL (TOKEN):</div>
-                                    <div>Status: SUCCESS (200)</div>
-                                    <div>Timestamp: ${new Date().toLocaleString('id-ID')}</div>
-                                    <div>NIP Peserta: ${nip}</div>
-                                </div>
+            // Mengirim data rangkuman akhir menggunakan content-type text/plain agar bebas dari pre-flight CORS preflight milik Google
+            fetch(WEB_APP_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(response => {
+                if (response && response.success) {
+                    mainBox.innerHTML = `
+                        <div class="text-center py-12 px-6 my-auto">
+                            <div class="w-20 h-20 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </div>
-                        `;
-                    } else {
-                        alert("Gagal mengamankan data final: " + response.message);
-                    }
-                })
-                .withFailureHandler(function(error) {
-                    alert("Terjadi gangguan fatal pada server: " + error);
-                })
-                .submitAssessmentFinal(kode, nip, jsonAnswers);
+                            <h1 class="heading-font text-2xl md:text-3xl font-extrabold text-white mb-2">ASESMEN SELESAI & TERSIMPAN</h1>
+                            <p class="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+                                Terima kasih, lembar jawaban Situational Judgment Test (SJT) Anda telah berhasil dikunci dan dikirimkan langsung ke pangkalan data Spreadsheet BKPSDM Kabupaten Sukoharjo.
+                            </p>
+                            <div class="mt-8 p-4 rounded-xl bg-slate-900 border border-slate-800 text-left text-xs font-mono max-w-sm w-full space-y-1.5 mx-auto">
+                                <div class="text-sky-400 border-b border-slate-800 pb-1 font-bold">BUKTI DIGITAL (TOKEN):</div>
+                                <div>Status: SUCCESS (200)</div>
+                                <div>Timestamp: ${new Date().toLocaleString('id-ID')}</div>
+                                <div>NIP Peserta: ${nip}</div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    alert("Gagal mengunci lembar jawaban: " + response.message);
+                }
+            })
+            .catch(error => {
+                alert("Terjadi kesalahan sistem jembatan data: " + error.toString());
+            });
         }
     </script>
 </body>
