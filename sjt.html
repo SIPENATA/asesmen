@@ -55,15 +55,13 @@
             <div class="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6 space-y-4">
                 <div class="space-y-2">
                     <label class="block text-xs font-bold tracking-wider text-sky-400 uppercase">Kode Unik Kegiatan</label>
-                    <input type="text" id="input-kode-unik" value="KEUANGAN-2026" readonly placeholder="Contoh: SJT-G1-2026"
-                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 font-mono text-sm cursor-not-allowed">
+                    <input type="text" id="input-kode-unik" value="KEUANGAN-2026" readonly class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 font-mono text-sm cursor-not-allowed">
                 </div>
 
                 <div class="space-y-2">
                     <label class="block text-xs font-bold tracking-wider text-sky-400 uppercase">Nomor Induk Pegawai (NIP)</label>
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <input type="text" id="input-nip" placeholder="Masukkan NIP Resmi Anda" 
-                            class="flex-1 px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 font-mono text-sm neon-border-blue transition-all duration-200">
+                        <input type="text" id="input-nip" placeholder="Masukkan NIP Resmi Anda" class="flex-1 px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 font-mono text-sm neon-border-blue transition-all duration-200">
                         <button onclick="verifyNIPFromBackend()" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-400 font-semibold text-sm border border-slate-700 transition-all duration-200 shrink-0">
                             Verifikasi Data
                         </button>
@@ -75,7 +73,7 @@
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span>Menghubungkan ke Spreadsheet Backend...</span>
+                    <span>Mencari biodata di server BKPSDM... Mohon Tunggu.</span>
                 </div>
 
                 <div id="success-alert" class="hidden flex items-start gap-3 p-4 bg-emerald-950/30 border border-emerald-800/40 rounded-xl text-emerald-400 text-xs leading-relaxed">
@@ -87,7 +85,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                 <div class="space-y-1.5"><label class="text-slate-500">Nama Lengkap</label><input type="text" id="bio-nama" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
                 <div class="space-y-1.5"><label class="text-slate-500">Pangkat / Golongan</label><input type="text" id="bio-gol" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
-                <div class="space-y-1.5"><label class="text-slate-500">Jabatan Struktural/Fungsional</label><input type="text" id="bio-jabatan" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
+                <div class="space-y-1.5"><label class="text-slate-500">Jabatan</label><input type="text" id="bio-jabatan" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
                 <div class="space-y-1.5"><label class="text-slate-500">Instansi / Perangkat Daerah</label><input type="text" id="bio-pd" readonly class="w-full p-3 bg-slate-900/30 border border-slate-800 rounded-xl text-slate-300 font-medium cursor-not-allowed"></div>
             </div>
 
@@ -100,7 +98,7 @@
             <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/30 border border-slate-800/80 px-4 py-3 rounded-2xl text-xs">
                 <div class="flex items-center gap-4 text-slate-400">
                     <div>NIP: <span id="display-nip" class="text-slate-200 font-mono font-bold"></span></div>
-                    <div class="hidden sm:block">Nama: <span id="display-nama" class="text-slate-200 font-bold"></span></div>
+                    <div>Nama: <span id="display-nama" class="text-slate-200 font-bold"></span></div>
                 </div>
                 <div class="font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md">
                     Progress: <span id="progress-text">0 / 3</span> Soal Terjawab
@@ -110,10 +108,9 @@
             <div class="space-y-4 my-auto py-4">
                 <div class="space-y-2">
                     <span id="question-number" class="text-xs font-bold uppercase tracking-wider text-sky-400">SOAL NOMOR 1</span>
-                    <p id="question-text" class="text-base md:text-lg text-white font-medium leading-relaxed">Memuat konten studi kasus teks...</p>
+                    <p id="question-text" class="text-base md:text-lg text-white font-medium leading-relaxed">Memuat...</p>
                 </div>
-                <div id="options-container" class="space-y-3 pt-2">
-                    </div>
+                <div id="options-container" class="space-y-3 pt-2"></div>
             </div>
 
             <div class="flex justify-between items-center gap-4 border-t border-slate-800/60 pt-4">
@@ -124,17 +121,16 @@
         </div>
 
         <div class="text-center text-[10px] text-slate-600 tracking-wide border-t border-slate-900/50 pt-4 mt-6">
-            &copy; 2026 Badan Kepegawaian dan Pengembangan Sumber Daya Manusia (BKPSDM) Kabupaten Sukoharjo. All Rights Reserved.
+            &copy; 2026 Badan Kepegawaian dan Pengembangan Sumber Daya Manusia (BKPSDM) Kabupaten Sukoharjo.
         </div>
     </div>
 
     <script>
         // ====================================================================
-        // KONFIGURASI JEMBATAN API (PASTIKAN MASUKKAN URL EXEC SPREADSHEET ANDA)
+        // GANTI "URL_WEB_APP_ANDA_DISINI" DENGAN URL EXEC APPS SCRIPT ANDA
         // ====================================================================
-        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx-mLi4aD8LvtqwmCuAk3h8vOF5dsh3IHVoxg78gkopAiroTkUDfIaj_44aKZG6zWHQ/exec"; 
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwLeA22FZmRsIFjHS-3RlgSZXz12yvrDqzg__R4kwpIwD71EfySenRicOA1hvh2_e0y/exec"; 
 
-        // Simulasi Bank Soal Kondisional (SJT) BKPSDM Sukoharjo
         const bankSoal = [
             {
                 id: 1,
@@ -149,25 +145,29 @@
             {
                 id: 2,
                 soal: "Saat melakukan pelayanan administrasi sertifikat digital pelatihan pegawai di kantor BKPSDM, seorang oknum mengaku dari instansi strategis meminta didahulukan layanannya tanpa mengantre dengan alasan perintah pimpinan daerah, padahal antrean di sistem saat itu sedang sangat padat. Sikap Anda?",
-                A: "Menolak dengan tegas dan meminta oknum tersebut tetap mengambil nomor antrean demi asas keadilan seluruh aparatur.",
-                B: "Langsung melayaninya saat itu juga karena khawatir memicu konflik horizontal dengan jaringan pimpinan daerah.",
-                C: "Menerima berkasnya secara sopan, menerangkan prosedur tata tertib antrean, dan berjanji memprosesnya segera setelah antrean saat itu terurai.",
-                D: "Melimpahkan penanganan oknum tersebut kepada subkoordinator atau kepala bidang agar instansi Anda aman dari intimidasi."
+                opsi: {
+                    A: "Menolak dengan tegas dan meminta oknum tersebut tetap mengambil nomor antrean demi asas keadilan seluruh aparatur.",
+                    B: "Langsung melayaninya saat itu juga karena khawatir memicu konflik horizontal dengan jaringan pimpinan daerah.",
+                    C: "Menerima berkasnya secara sopan, menerangkan prosedur tata tertib antrean, dan berjanji memprosesnya segera setelah antrean saat itu terurai.",
+                    D: "Melimpahkan penanganan oknum tersebut kepada subkoordinator atau kepala bidang agar instansi Anda aman dari intimidasi."
+                }
             },
             {
                 id: 3,
                 soal: "Sukoharjo Corporate University (SuCoSity) meluncurkan program pelatihan digital mandiri (MOOC) baru. Namun dari evaluasi awal, tingkat partisipasi pegawai dari rumpun kecamatan sangat rendah karena alasan kendala sinyal internet dan kesibukan administrasi lapangan. Bagaimana strategi solusi Anda?",
-                A: "Mengusulkan pembuatan posko belajar digital komunal terpadu di tingkat kecamatan dengan fasilitas internet difasilitasi daerah.",
-                B: "Memberikan teguran tertulis atau sanksi pemotongan nilai indeks profesionalitas bagi pegawai kecamatan yang tidak ikut.",
-                C: "Membiarkan kondisi tersebut karena beranggapan bahwa digitalisasi adalah tanggung jawab pribadi masing-masing pegawai.",
-                D: "Mengubah format pembelajaran mandiri menjadi sistem klasikal (tatap muka) penuh khusus untuk klaster aparatur kecamatan."
+                opsi: {
+                    A: "Mengusulkan pembuatan posko belajar digital komunal terpadu di tingkat kecamatan dengan fasilitas internet difasilitasi daerah.",
+                    B: "Memberikan teguran tertulis atau sanksi pemotongan nilai indeks profesionalitas bagi pegawai kecamatan yang tidak ikut.",
+                    C: "Membiarkan kondisi tersebut karena beranggapan bahwa digitalisasi adalah tanggung jawab pribadi masing-masing pegawai.",
+                    D: "Mengubah format pembelajaran mandiri menjadi sistem klasikal (tatap muka) penuh khusus untuk klaster aparatur kecamatan."
+                }
             }
         ];
 
         let currentQuestionIndex = 0;
-        let userAnswers = {}; // Objek penyimpan jawaban lokal { nomorSoal: pilihan }
+        let userAnswers = {}; 
 
-        // 1. FUNGSI VERIFIKASI NIP (MENGGUNAKAN JALUR GET FETCH API)
+        // 1. FUNGSI VERIFIKASI NIP (FIX REDIRECT GOOGLE)
         function verifyNIPFromBackend() {
             const nip = document.getElementById('input-nip').value.trim();
             const kode = document.getElementById('input-kode-unik').value.trim();
@@ -184,36 +184,41 @@
             if (spinner) spinner.classList.remove('hidden');
             if (alertBox) alertBox.classList.add('hidden');
 
-            // Integrasi ke Google Script (doGet)
             const endpoints = `${WEB_APP_URL}?action=getEmployee&nip=${nip}`;
 
-            fetch(endpoints)
-                .then(res => res.json())
-                .then(response => {
-                    if (spinner) spinner.classList.add('hidden');
+            fetch(endpoints, {
+                method: "GET",
+                redirect: "follow" // Memaksa browser mengikuti pengalihan server Google
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP Status Error: " + res.status);
+                return res.json();
+            })
+            .then(response => {
+                if (spinner) spinner.classList.add('hidden');
+                
+                if (response && response.success) {
+                    if (alertBox) alertBox.classList.remove('hidden');
+                    document.getElementById('alert-text').innerText = "Data ditemukan! Profil Anda berhasil disinkronisasikan.";
                     
-                    if (response && response.success) {
-                        if (alertBox) alertBox.classList.remove('hidden');
-                        document.getElementById('alert-text').innerText = "Data ditemukan! Profil Anda berhasil disinkronisasikan.";
-                        
-                        document.getElementById('bio-nama').value = response.nama || '-';
-                        document.getElementById('bio-gol').value = response.pangkatGolongan || '-';
-                        document.getElementById('bio-jabatan').value = response.jabatan || '-';
-                        document.getElementById('bio-pd').value = response.perangkatDaerah || '-';
-                        
-                        if (btnStart) {
-                            btnStart.removeAttribute('disabled');
-                            btnStart.className = "w-full py-4 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-slate-900 font-bold tracking-wider uppercase transition-all duration-300 text-sm shadow-lg hover:opacity-90";
-                        }
-                    } else {
-                        alert(response.message || "NIP tidak ditemukan di database.");
+                    document.getElementById('bio-nama').value = response.nama || '-';
+                    document.getElementById('bio-gol').value = response.pangkatGolongan || '-';
+                    document.getElementById('bio-jabatan').value = response.jabatan || '-';
+                    document.getElementById('bio-pd').value = response.perangkatDaerah || '-';
+                    
+                    if (btnStart) {
+                        btnStart.removeAttribute('disabled');
+                        btnStart.className = "w-full py-4 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-slate-900 font-bold tracking-wider uppercase transition-all duration-300 text-sm shadow-lg hover:opacity-90";
                     }
-                })
-                .catch(error => {
-                    if (spinner) spinner.classList.add('hidden');
-                    alert("Gagal terhubung ke Google API Gateway. Pastikan URL Web App Anda valid dan setelan aksesnya 'Anyone'.");
-                    console.error(error);
-                });
+                } else {
+                    alert(response.message || "NIP tidak ditemukan di database.");
+                }
+            })
+            .catch(error => {
+                if (spinner) spinner.classList.add('hidden');
+                alert("Gagal menarik data dari Apps Script Backend. Periksa kembali pengaturan Deployment Anda.\nDetail: " + error.toString());
+                console.error(error);
+            });
         }
 
         function switchViewToAssessment() {
@@ -233,13 +238,12 @@
             const containerOpsi = document.getElementById('options-container');
             containerOpsi.innerHTML = '';
             
-            // Loop abjad pilihan jawaban A s.d D
             for (const [key, value] of Object.entries(soalAktif.opsi)) {
                 const isSelected = userAnswers[soalAktif.id] === key;
                 const button = document.createElement('button');
                 button.className = `w-full text-left p-4 rounded-xl border transition-all duration-200 text-sm flex gap-3 ${
                     isSelected 
-                    ? 'bg-sky-500/10 border-sky-500 text-sky-300 font-medium shadow-md shadow-sky-500/5' 
+                    ? 'bg-sky-500/10 border-sky-500 text-sky-300 font-medium shadow-md' 
                     : 'bg-slate-900/40 border-slate-800 text-slate-300 hover:bg-slate-900/80 hover:border-slate-700'
                 }`;
                 
@@ -250,37 +254,30 @@
                 `;
                 containerOpsi.appendChild(button);
             }
-            
             updateNavigationControls();
         }
 
-        // 2. FUNGSI AUTO-SAVE (MENGGUNAKAN JALUR POST FETCH API - REALTIME)
+        // 2. FUNGSI AUTO-SAVE REALTIME (POST VIA CROS BYPASS)
         function selectAnswer(soalId, abjadPilihan) {
             userAnswers[soalId] = abjadPilihan;
             renderQuestion();
             
-            const countAnswered = Object.keys(userAnswers).length;
-            document.getElementById('progress-text').innerText = countAnswered;
+            document.getElementById('progress-text').innerText = Object.keys(userAnswers).length;
             
-            const kodeKegiatan = document.getElementById('input-kode-unik').value.trim();
-            const nip = document.getElementById('input-nip').value.trim();
-            
-            // Format lemparan data ke backend (POST)
             const payload = {
                 action: "saveRealTime",
-                kodeKegiatan: kodeKegiatan,
-                nip: nip,
+                kodeKegiatan: document.getElementById('input-kode-unik').value.trim(),
+                nip: document.getElementById('input-nip').value.trim(),
                 nomorSoal: soalId,
                 pilihanJawaban: abjadPilihan
             };
 
-            // Fetch POST dengan mode no-cors agar pengiriman data latar belakang tidak terkendala regulasi browser
             fetch(WEB_APP_URL, {
                 method: "POST",
-                mode: "no-cors",
+                mode: "no-cors", // Aman dikirim di latar belakang tanpa hambatan browser
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
-            }).catch(err => console.error("Koneksi gagal saat auto-save:", err));
+            }).catch(err => console.error("Auto-save failed:", err));
         }
 
         function navigateQuestion(arah) {
@@ -290,7 +287,6 @@
 
         function updateNavigationControls() {
             document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
-            
             if (currentQuestionIndex === bankSoal.length - 1) {
                 document.getElementById('btn-next').classList.add('hidden');
                 document.getElementById('btn-submit').classList.remove('hidden');
@@ -300,36 +296,27 @@
             }
         }
 
-        // 3. FUNGSI SUBMIT FINAL SELESAI UJIAN (MENGGUNAKAN JALUR POST FETCH API)
+        // 3. FUNGSI SUBMIT FINAL (POST VIA PLAIN TEXT BYPASS)
         function triggerFinalSubmission() {
-            const countAnswered = Object.keys(userAnswers).length;
-            if (countAnswered < bankSoal.length) {
-                if (!confirm("Anda belum menjawab seluruh soal asesmen. Tetap ingin menyelesaikan dan mengunci lembar ujian?")) {
-                    return;
-                }
+            if (Object.keys(userAnswers).length < bankSoal.length) {
+                if (!confirm("Beberapa soal belum dijawab. Yakin ingin mengirim sekarang?")) return;
             } else {
-                if (!confirm("Apakah Anda sudah yakin dengan semua jawaban Anda? Klik OK untuk mengunci nilai data secara permanen.")) {
-                    return;
-                }
+                if (!confirm("Apakah Anda yakin ingin mengunci lembar jawaban Anda secara permanen?")) return;
             }
 
             const mainBox = document.getElementById('container-box-utama');
-            mainBox.innerHTML = '<div class="text-center py-20 text-sky-400 font-medium">Mengunci seluruh lembar jawaban... Jangan tutup halaman ini.</div>';
-
-            const kodeKegiatan = document.getElementById('input-kode-unik').value.trim();
-            const nip = document.getElementById('input-nip').value.trim();
+            mainBox.innerHTML = '<div class="text-center py-20 text-sky-400 font-medium animate-pulse">Mengunci & mengenkripsi data lembar jawaban final... Mohon tunggu.</div>';
 
             const payload = {
                 action: "submitFinal",
-                kodeKegiatan: kodeKegiatan,
-                nip: nip,
+                kodeKegiatan: document.getElementById('input-kode-unik').value.trim(),
+                nip: document.getElementById('input-nip').value.trim(),
                 userAnswersObj: userAnswers
             };
 
-            // Mengirim data rangkuman akhir menggunakan content-type text/plain agar bebas dari pre-flight CORS preflight milik Google
             fetch(WEB_APP_URL, {
                 method: "POST",
-                headers: { "Content-Type": "text/plain" },
+                headers: { "Content-Type": "text/plain" }, // Bypass pre-flight CORS milik Google
                 body: JSON.stringify(payload)
             })
             .then(res => res.json())
@@ -342,22 +329,22 @@
                             </div>
                             <h1 class="heading-font text-2xl md:text-3xl font-extrabold text-white mb-2">ASESMEN SELESAI & TERSIMPAN</h1>
                             <p class="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
-                                Terima kasih, lembar jawaban Situational Judgment Test (SJT) Anda telah berhasil dikunci dan dikirimkan langsung ke pangkalan data Spreadsheet BKPSDM Kabupaten Sukoharjo.
+                                Terima kasih, lembar jawaban Situational Judgment Test (SJT) Anda telah dikunci dan dikirim ke pangkalan data Spreadsheet BKPSDM Kabupaten Sukoharjo.
                             </p>
                             <div class="mt-8 p-4 rounded-xl bg-slate-900 border border-slate-800 text-left text-xs font-mono max-w-sm w-full space-y-1.5 mx-auto">
                                 <div class="text-sky-400 border-b border-slate-800 pb-1 font-bold">BUKTI DIGITAL (TOKEN):</div>
                                 <div>Status: SUCCESS (200)</div>
                                 <div>Timestamp: ${new Date().toLocaleString('id-ID')}</div>
-                                <div>NIP Peserta: ${nip}</div>
+                                <div>NIP Peserta: ${payload.nip}</div>
                             </div>
                         </div>
                     `;
                 } else {
-                    alert("Gagal mengunci lembar jawaban: " + response.message);
+                    alert("Gagal mengunci data: " + response.message);
                 }
             })
             .catch(error => {
-                alert("Terjadi kesalahan sistem jembatan data: " + error.toString());
+                alert("Gangguan transmisi gateway data: " + error.toString());
             });
         }
     </script>
