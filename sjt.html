@@ -127,7 +127,7 @@
 
     <script>
         // ====================================================================
-        // GANTI "URL_WEB_APP_ANDA_DISINI" DENGAN URL EXEC APPS SCRIPT ANDA
+        // AUTOMATICED ROUTER URL SPREADSHEET BACKEND
         // ====================================================================
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwLeA22FZmRsIFjHS-3RlgSZXz12yvrDqzg__R4kwpIwD71EfySenRicOA1hvh2_e0y/exec"; 
 
@@ -167,7 +167,7 @@
         let currentQuestionIndex = 0;
         let userAnswers = {}; 
 
-        // 1. FUNGSI VERIFIKASI NIP (FIX REDIRECT GOOGLE)
+        // 1. FUNGSI SINKRONISASI VERIFIKASI NIP (NAMA SINKRON DENGAN EVENT ONCLICK TOMBOL)
         function verifyNIPFromBackend() {
             const nip = document.getElementById('input-nip').value.trim();
             const kode = document.getElementById('input-kode-unik').value.trim();
@@ -188,7 +188,7 @@
 
             fetch(endpoints, {
                 method: "GET",
-                redirect: "follow" // Memaksa browser mengikuti pengalihan server Google
+                redirect: "follow"
             })
             .then(res => {
                 if (!res.ok) throw new Error("HTTP Status Error: " + res.status);
@@ -216,7 +216,7 @@
             })
             .catch(error => {
                 if (spinner) spinner.classList.add('hidden');
-                alert("Gagal menarik data dari Apps Script Backend. Periksa kembali pengaturan Deployment Anda.\nDetail: " + error.toString());
+                alert("Gagal menarik data dari Apps Script Backend.\n\nDetail: " + error.toString());
                 console.error(error);
             });
         }
@@ -257,7 +257,7 @@
             updateNavigationControls();
         }
 
-        // 2. FUNGSI AUTO-SAVE REALTIME (POST VIA CROS BYPASS)
+        // 2. FUNGSI AUTO-SAVE REALTIME
         function selectAnswer(soalId, abjadPilihan) {
             userAnswers[soalId] = abjadPilihan;
             renderQuestion();
@@ -274,7 +274,7 @@
 
             fetch(WEB_APP_URL, {
                 method: "POST",
-                mode: "no-cors", // Aman dikirim di latar belakang tanpa hambatan browser
+                mode: "no-cors",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             }).catch(err => console.error("Auto-save failed:", err));
@@ -296,7 +296,7 @@
             }
         }
 
-        // 3. FUNGSI SUBMIT FINAL (POST VIA PLAIN TEXT BYPASS)
+        // 3. FUNGSI SUBMIT FINAL TEST
         function triggerFinalSubmission() {
             if (Object.keys(userAnswers).length < bankSoal.length) {
                 if (!confirm("Beberapa soal belum dijawab. Yakin ingin mengirim sekarang?")) return;
@@ -305,7 +305,7 @@
             }
 
             const mainBox = document.getElementById('container-box-utama');
-            mainBox.innerHTML = '<div class="text-center py-20 text-sky-400 font-medium animate-pulse">Mengunci & mengenkripsi data lembar jawaban final... Mohon tunggu.</div>';
+            mainBox.innerHTML = '<div class="text-center py-20 text-sky-400 font-medium animate-pulse">Mengunci & mengirim data lembar jawaban final... Mohon tunggu.</div>';
 
             const payload = {
                 action: "submitFinal",
@@ -316,7 +316,7 @@
 
             fetch(WEB_APP_URL, {
                 method: "POST",
-                headers: { "Content-Type": "text/plain" }, // Bypass pre-flight CORS milik Google
+                headers: { "Content-Type": "text/plain" },
                 body: JSON.stringify(payload)
             })
             .then(res => res.json())
